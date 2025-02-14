@@ -49,6 +49,27 @@ public class ScoreController {
             return score;
         }
     }
+
+    @PatchMapping("/score/{wlt2}")
+    public Score updateScore(@PathVariable String wlt2 ,
+                             @RequestParam(name = "new-value")int newValue){
+
+        if (wlt2.equalsIgnoreCase("wins")){
+            score.setWins(newValue);
+            return score;
+        }
+        else if (wlt2.equalsIgnoreCase("losses")){
+            score.setLosses(newValue);
+            return score;
+        }
+        else if (wlt2.equalsIgnoreCase("ties")) {
+            score.setTies(newValue);
+            return score;
+        }
+        else {
+            throw new IllegalArgumentException("invalid parameter: " + wlt2);
+        }
+    }
 }
 
 //http://localhost:8080/score/ties
