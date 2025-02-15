@@ -52,7 +52,7 @@ public class ScoreController {
 
     @PatchMapping("/score/{wlt2}")
     public Score updateScore(@PathVariable String wlt2 ,
-                             @RequestParam(name = "new-value")int newValue){
+                             @RequestParam(name = "new-value", required = false, defaultValue = "0")int newValue){
 
         if (wlt2.equalsIgnoreCase("wins")){
             score.setWins(newValue);
@@ -69,6 +69,12 @@ public class ScoreController {
         else {
             throw new IllegalArgumentException("invalid parameter: " + wlt2);
         }
+    }
+
+    @PutMapping("/score")
+    public Score replaceScore(@RequestBody Score newScore){
+        score = newScore;
+        return score;
     }
 }
 
