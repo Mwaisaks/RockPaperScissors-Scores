@@ -76,6 +76,14 @@ public class ScoreController {
         score = newScore;
         return score;
     }
+
+    @DeleteMapping("/score") //removes the resource from the server
+    public String deleteScore(){
+        score.setWins(0);
+        score.setTies(0);
+        score.setLosses(0);
+        return "Score reset to zero.";
+    }
 }
 
 //http://localhost:8080/score/ties
